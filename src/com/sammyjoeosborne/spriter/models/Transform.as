@@ -10,23 +10,25 @@ package com.sammyjoeosborne.spriter.models
 		private var _x:Number;
 		private var _y:Number;
 		private var _angle:Number;
+		private var _a:Number;
 		private var _scaleX:Number;
 		private var _scaleY:Number;
 		
 		private var _rPoint:Point = new Point(); //optimization: avoids creating/disposing of this point during the rotation functions
 		
-		public function Transform($x:Number= 0, $y:Number = 0, $angle:Number = 0, $scaleX:Number = 1, $scaleY:Number = 1) 
+		public function Transform($x:Number= 0, $y:Number = 0, $angle:Number = 0, $a:Number = 1, $scaleX:Number = 1, $scaleY:Number = 1) 
 		{
 			_x = $x;
 			_y = $y;
 			_angle = $angle;
+			_a = $a;
 			_scaleX = $scaleX;
 			_scaleY = $scaleY;
 		}
 		
 		public function equals($t:Transform):Boolean
 		{
-			return(_x == $t.x && _y == $t.y && _angle == $t.angle && _scaleX == $t._scaleX && _scaleY == $t.scaleY);
+			return(_x == $t.x && _y == $t.y && _angle == $t.angle && _a == $t.a && _scaleX == $t._scaleX && _scaleY == $t.scaleY);
 		}
 		
 		//Imagine a tween as a function of values. In linear it's a straight line, in quadratic it's curved, etc.
@@ -101,6 +103,7 @@ package com.sammyjoeosborne.spriter.models
 				//_angle = _angle + ($transform.angle - _angle) * $tweenFactor; //manual inline lerping
 			}
 			
+			_a = lerp(_a, $transform.a, $tweenFactor);
 			_scaleX = lerp(_scaleX, $transform.scaleX, $tweenFactor);
 			_scaleY = lerp(_scaleY, $transform.scaleY, $tweenFactor);
 			//_scaleX = _scaleX + ($transform.scaleX - _scaleX) * $tweenFactor; //manual inline lerping
@@ -118,6 +121,7 @@ package com.sammyjoeosborne.spriter.models
 			_y = _rPoint.y;
 			
 			_angle += $parent.angle;
+			_a *= $parent.a;
 			_scaleX *= $parent.scaleX;
 			_scaleY *= $parent.scaleY;
 		}
@@ -129,6 +133,7 @@ package com.sammyjoeosborne.spriter.models
 			_y = $t.y;
 			_scaleX = $t.scaleX;
 			_scaleY = $t.scaleY;
+			_a = $t.a;
 			_angle = $t.angle;
 			
 			return this;
@@ -136,7 +141,7 @@ package com.sammyjoeosborne.spriter.models
 		
 		public function clone():Transform
 		{
-			return new Transform(_x, _y, _angle, _scaleX, _scaleY);
+			return new Transform(_x, _y, _angle, _a, _scaleX, _scaleY);
 		}
 		
 		public function toString():String
@@ -152,6 +157,9 @@ package com.sammyjoeosborne.spriter.models
 		
 		public function get angle():Number {	return _angle;}
 		public function set angle(value:Number):void{	_angle = value;}
+		
+		public function get a():Number {	return _a;}
+		public function set a(value:Number):void{	_a = value;}
 		
 		public function get scaleX():Number {	return _scaleX;}
 		public function set scaleX(value:Number):void{	_scaleX = value;}

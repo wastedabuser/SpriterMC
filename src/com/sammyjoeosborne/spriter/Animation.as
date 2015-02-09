@@ -603,6 +603,7 @@ package com.sammyjoeosborne.spriter
 							}
 						}
 						
+						$image.alpha = $transform.a;
 						$image.scaleX = $transform.scaleX;
 						$image.scaleY = $transform.scaleY;
 						$image.x = $transform.x;

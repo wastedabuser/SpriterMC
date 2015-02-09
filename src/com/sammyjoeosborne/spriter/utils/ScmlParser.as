@@ -158,6 +158,7 @@ package com.sammyjoeosborne.spriter.utils
 						//There are certain properties that don't exist on bones, only on objects: folder, file, pivots
 						if ($prop == "object")
 						{
+							$key.a = $keyXML.object.hasOwnProperty("@a") ? Number($keyXML.object.@a) : 1;
 							$key.folder =  parseInt($keyXML.object.@folder);
 							$key.file = parseInt($keyXML.object.@file);
 							$key.fileObject = _scmlData.folders[$key.folder].files[$key.file];

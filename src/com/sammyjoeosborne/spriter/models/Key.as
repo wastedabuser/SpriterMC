@@ -77,7 +77,12 @@ package com.sammyjoeosborne.spriter.models
 		public function set angle(value:Number):void {
 			_originalTransform.angle = value;
 		}
-				
+		
+		public function get a():Number { return _originalTransform.a; };
+		public function set a(value:Number):void {
+			_originalTransform.a = value;
+		}
+		
 		public function get scaleX():Number { return _originalTransform.scaleX; }
 		public function set scaleX(value:Number):void {
 			_originalTransform.scaleX = value;
